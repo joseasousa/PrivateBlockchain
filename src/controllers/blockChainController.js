@@ -1,6 +1,5 @@
 const Blockchain = require('../models/blockchain')
 const Block = require('../models/block')
-
 const blockChain = new Blockchain()
 
 module.exports = {
@@ -12,12 +11,13 @@ module.exports = {
   },
   block: (req, res) => {
     const blockData = req.body.data
+    console.log(req.body)
     if (blockData) {
-      const newBlock = Block(blockData)
+      const newBlock = new Block(blockData)
       blockChain.addBlock(newBlock).then(block => {
         res.json({
           success: true,
-          data: block
+          data: newBlock
         })
       })
     } else {
