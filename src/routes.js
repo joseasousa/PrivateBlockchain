@@ -8,6 +8,6 @@ routes.get('/', blockChainController.index)
 
 routes.get('/block/:height', blockChainController.getBlock)
 
-routes.post('/block/', blockChainController.block)
+routes.post('/block', blockChainController.block)
 
 module.exports = routes
