@@ -1,7 +1,10 @@
-# Udacity Project: Private Blockchain
+### About
+This project is intended to demonstrated a simple private blockchain creation using models and helpers. It is ready to scale and build features on top of it
 
-Private Blockchain project for Blockchain Developer Nanodegree from Udacity.
-
+### Requirements
+* [Node.js](https://nodejs.org)
+* [NPM](https://www.npmjs.com)
+* [LevelDB](https://github.com/google/leveldb)
 
 ## Run App
 ```sh
