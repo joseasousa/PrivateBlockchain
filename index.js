@@ -1,20 +1,14 @@
-const Block = require('./block')
-const Blockchain = require('./blockchain')
+const express = require('express')
 
-let blockchain = new Blockchain()
+const bodyParser = require('body-parser')
 
-blockchain.addBlock(new Block('test data ' + 1))
-  .then(
-    () => blockchain.addBlock(new Block('test data ' + 2))
-      .then(() => blockchain.addBlock(new Block('test data ' + 3)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 4)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 5)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 6)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 7)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 8)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 9)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 10)))
-      .then(() => blockchain.addBlock(new Block('test data ' + 11)))
-  )
+const routes = require('./src/routes')
+const app = express()
 
-blockchain.validateChain()
+app.use('/', routes)
+app.use(bodyParser)
+
+const PORT = 3000
+const HOST = '0.0.0.0'
+
+app.listen(PORT, HOST)

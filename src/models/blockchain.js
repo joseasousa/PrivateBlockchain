@@ -1,5 +1,5 @@
 const SHA256 = require('crypto-js/sha256')
-const leveldb = require('./levelSandbox')
+const leveldb = require('../utils/levelSandbox')
 
 class Blockchain {
   async addBlock (newBlock) {
