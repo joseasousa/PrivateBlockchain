@@ -2,7 +2,12 @@
   "name": "private-chain",
   "version": "1.0.0",
   "description": "Private BlockChain",
-  "keywords": ["blockchain", "node", "leveDB","Udacity"],
+  "keywords": [
+    "blockchain",
+    "node",
+    "leveDB",
+    "Udacity"
+  ],
   "author": "Jose Alves",
   "main": "index.js",
   "scripts": {

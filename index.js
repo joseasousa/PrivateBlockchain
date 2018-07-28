@@ -17,4 +17,4 @@ blockchain.addBlock(new Block('test data ' + 1))
       .then(() => blockchain.addBlock(new Block('test data ' + 11)))
   )
 
-setTimeout(() => blockchain.validateChain(), 10000)
+blockchain.validateChain()
