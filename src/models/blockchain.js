@@ -58,12 +58,11 @@ class Blockchain {
       return true
     } else {
       console.log(
-        'Block #' +
-          blockHeight +
-          ' invalid hash:\n' +
-          blockHash +
-          '<>' +
-          validBlockHash
+        `Block #
+          ${blockHeight} 
+          invalid hash:\n
+          ${blockHash} <>
+          validBlockHash`
       )
       return false
     }

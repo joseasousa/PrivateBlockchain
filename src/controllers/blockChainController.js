@@ -11,7 +11,7 @@ module.exports = {
   },
   block: (req, res) => {
     const blockData = req.body.data
-    console.log(req.body)
+
     if (blockData) {
       const newBlock = new Block(blockData)
       blockChain.addBlock(newBlock).then(block => {
@@ -24,8 +24,8 @@ module.exports = {
       res.statusCode = 400
       res.json({
         success: false,
-        message:
-          "Please provide the block data by setting the data property of the request's body object"
+        message: `Please provide the block data by setting the data 
+        property of the request's body object`
       })
     }
   },
@@ -41,14 +41,14 @@ module.exports = {
         res.statusCode = 404
         res.json({
           success: false,
-          message: 'block ' + req.params.height + ' does not exist.'
+          message: `block ${req.params.height} does not exist.`
         })
       }
     } catch (e) {
       res.statusCode = 500
       res.json({
         success: false,
-        message: 'Something went wrong while getting block ' + req.params.height
+        message: `Something went wrong while getting block ${req.params.height}`
       })
     }
   }
