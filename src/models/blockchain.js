@@ -1,7 +1,16 @@
 const SHA256 = require('crypto-js/sha256')
 const leveldb = require('../utils/levelSandbox')
+const Block = require('./block')
 
 class Blockchain {
+  constructor () {
+    leveldb.getBlockHeight().then(num => {
+      if (num === 0) {
+        this.addBlock(new Block('First block in the chain - Genesis block'))
+      }
+    })
+  }
+
   async addBlock (newBlock) {
     newBlock.height = await this.getBlockHeight()
 
@@ -67,31 +76,34 @@ class Blockchain {
 
     let errorLog = []
 
-    leveldb.getBlockStream().on('data', (data) => {
-      block = JSON.parse(data.value)
+    leveldb
+      .getBlockStream()
+      .on('data', data => {
+        block = JSON.parse(data.value)
 
-      isValidBlock = this.validateBlock(block.height)
+        isValidBlock = this.validateBlock(block.height)
 
-      if (!isValidBlock) {
-        errorLog.push(data.key)
-      }
+        if (!isValidBlock) {
+          errorLog.push(data.key)
+        }
 
-      if (block.previousBlockHash !== previousHash) {
-        errorLog.push(data.key)
-      }
+        if (block.previousBlockHash !== previousHash) {
+          errorLog.push(data.key)
+        }
 
-      previousHash = block.hash
-    }).on('error',
-      (error) => {
+        previousHash = block.hash
+      })
+      .on('error', error => {
         console.error(`Error on validateChain: ${error}`)
-      }).on('close', () => {
-      if (errorLog.length > 0) {
-        console.log(`Block errors = ${errorLog.length}`)
-        console.log(`Blocks: ${errorLog}`)
-      } else {
-        console.log('No errors detected')
-      }
-    })
+      })
+      .on('close', () => {
+        if (errorLog.length > 0) {
+          console.log(`Block errors = ${errorLog.length}`)
+          console.log(`Blocks: ${errorLog}`)
+        } else {
+          console.log('No errors detected')
+        }
+      })
   }
 }
 
