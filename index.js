@@ -1,19 +1,19 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
-
 const routes = require('./src/routes')
-const app = express()
 
-app.use(compression())
-
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use(require('method-override')())
-
-app.use('/', routes)
-
-const PORT = 3000
+const PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = '0.0.0.0'
 
-app.listen(PORT, HOST)
+const server = express()
+
+server.use(compression())
+
+server.use(bodyParser.urlencoded({ extended: true }))
+server.use(bodyParser.json())
+server.use(require('method-override')())
+
+server.use('/', routes)
+
+server.listen(PORT, HOST)

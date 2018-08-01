@@ -1,9 +1,9 @@
-FROM node:alpine
+FROM yarnpkg/node-yarn
 
 WORKDIR /usr/app
 
 COPY package*.json ./
-RUN npm install
+RUN yarn
 
 COPY . .
 

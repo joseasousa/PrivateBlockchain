@@ -6,7 +6,9 @@ class Blockchain {
   constructor () {
     leveldb.getBlockHeight().then(num => {
       if (num === 0) {
-        this.addBlock(new Block('First block in the chain - Genesis block'))
+        this.addBlock(
+          new Block('First block in the chain - Genesis block')
+        ).then(() => console.log('genesis'))
       }
     })
   }
@@ -45,7 +47,7 @@ class Blockchain {
   }
 
   async validateBlock (blockHeight) {
-    const block = await leveldb.getBlock(blockHeight)
+    const block = await this.getBlock(blockHeight)
 
     let blockHash = block.hash
 
@@ -71,7 +73,6 @@ class Blockchain {
   async validateChain () {
     let previousHash = ''
     let block = ''
-    let isValidBlock = false
 
     let errorLog = []
 
@@ -80,17 +81,18 @@ class Blockchain {
       .on('data', data => {
         block = JSON.parse(data.value)
 
-        isValidBlock = this.validateBlock(block.height)
+        this.validateBlock(block.height)
+          .then(isValidBlock => {
+            if (!isValidBlock) {
+              errorLog.push(data.key)
+            }
 
-        if (!isValidBlock) {
-          errorLog.push(data.key)
-        }
+            if (block.previousBlockHash !== previousHash) {
+              errorLog.push(data.key)
+            }
 
-        if (block.previousBlockHash !== previousHash) {
-          errorLog.push(data.key)
-        }
-
-        previousHash = block.hash
+            previousHash = block.hash
+          })
       })
       .on('error', error => {
         console.error(`Error on validateChain: ${error}`)

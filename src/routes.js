@@ -4,7 +4,7 @@ const routes = express.Router()
 
 const blockChainController = require('./controllers/blockChainController')
 
-routes.get('/', blockChainController.index)
+routes.get('/info', blockChainController.index)
 
 routes.get('/block/:height', blockChainController.getBlock)
 
