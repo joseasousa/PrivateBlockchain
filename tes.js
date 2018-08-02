@@ -1,6 +1,7 @@
 const Block = require('./src/models/block')
 const Blockchain = require('./src/models/blockchain')
 let blockchain = new Blockchain()
+
 blockchain.addBlock(new Block('test data ' + 1)).then(() =>
   blockchain
     .addBlock(new Block('test data ' + 2))

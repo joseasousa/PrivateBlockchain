@@ -3,8 +3,7 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const routes = require('./src/routes')
 
-const PORT = parseInt(process.env.PORT, 10) || 3000
-const HOST = '0.0.0.0'
+const PORT = 3000
 
 const server = express()
 
@@ -16,4 +15,4 @@ server.use(require('method-override')())
 
 server.use('/', routes)
 
-server.listen(PORT, HOST)
+server.listen(PORT, () => console.log(`server run in ${PORT}`))
