@@ -73,6 +73,7 @@ class Blockchain {
   async validateChain () {
     let previousHash = ''
     let block = ''
+    let isValidBlock = false
 
     let errorLog = []
 
@@ -81,18 +82,17 @@ class Blockchain {
       .on('data', data => {
         block = JSON.parse(data.value)
 
-        this.validateBlock(block.height)
-          .then(isValidBlock => {
-            if (!isValidBlock) {
-              errorLog.push(data.key)
-            }
+        isValidBlock = this.validateBlock(block.height)
 
-            if (block.previousBlockHash !== previousHash) {
-              errorLog.push(data.key)
-            }
+        if (!isValidBlock) {
+          errorLog.push(data.key)
+        }
 
-            previousHash = block.hash
-          })
+        if (block.previousBlockHash !== previousHash) {
+          errorLog.push(data.key)
+        }
+
+        previousHash = block.hash
       })
       .on('error', error => {
         console.error(`Error on validateChain: ${error}`)
