@@ -3,7 +3,7 @@
 |  ============================================================= */
 
 const level = require('level')
-const chainDB = './chaindata'
+const chainDB = './chaindata';
 const db = level(chainDB)
 
 module.exports = {

@@ -8,6 +8,7 @@
     "leveDB",
     "Udacity"
   ],
+  "license": "ISC",
   "author": "Jose Alves",
   "main": "index.js",
   "scripts": {
@@ -24,6 +25,7 @@
     "method-override": "^3.0.0"
   },
   "devDependencies": {
+    "del": "^3.0.0",
     "jest": "^23.4.2",
     "nodemon": "^1.18.3",
     "supertest": "^3.1.0"

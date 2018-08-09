@@ -71,40 +71,28 @@ class Blockchain {
   }
 
   async validateChain () {
-    let previousHash = ''
-    let block = ''
-    let isValidBlock = false
-
     let errorLog = []
+    let chainLength = await this.getBlockHeight()
+    for (let i = 0; i < chainLength - 1; i++) {
+      if (!this.validateBlock(i))errorLog.push(i)
 
-    leveldb
-      .getBlockStream()
-      .on('data', data => {
-        block = JSON.parse(data.value)
+      let block = await this.getBlock(i)
+      let blockHash = block.hash
 
-        isValidBlock = this.validateBlock(block.height)
+      let nextBlock = await this.getBlock(i + 1)
+      let previousHash = nextBlock.previousBlockHash
 
-        if (!isValidBlock) {
-          errorLog.push(data.key)
-        }
+      if (blockHash !== previousHash) {
+        errorLog.push(i)
+      }
+    }
 
-        if (block.previousBlockHash !== previousHash) {
-          errorLog.push(data.key)
-        }
-
-        previousHash = block.hash
-      })
-      .on('error', error => {
-        console.error(`Error on validateChain: ${error}`)
-      })
-      .on('close', () => {
-        if (errorLog.length > 0) {
-          console.log(`Block errors = ${errorLog.length}`)
-          console.log(`Blocks: ${errorLog}`)
-        } else {
-          console.log('No errors detected')
-        }
-      })
+    if (errorLog.length > 0) {
+      console.log('Block errors = ' + errorLog.length)
+      console.log('Blocks: ' + errorLog)
+    } else {
+      console.log('No errors detected')
+    }
   }
 }
 
