@@ -31,9 +31,10 @@ This starts the API server, listening on port 8000 of localhost.
 ### Endpoints
 
 The endpoints implemented are:
-```
-POST /block
-```
+
+### POST /block
+
+
 Sample input:
 ```json
 {
@@ -55,9 +56,9 @@ Sample output:
 }
 ```
 
-```
-GET /chain
-```
+
+### GET /chain
+
 
 
 Sample output:
@@ -82,9 +83,9 @@ Sample output:
 ]
 ```
 
-```
-GET /block/{height}
-```
+
+### GET /block/{height}
+
 
 Sample output:
 ```json
