@@ -4,7 +4,7 @@ const routes = express.Router()
 
 const blockChainController = require('./controllers/blockChainController')
 
-routes.get('/', blockChainController.index)
+routes.get('/chain', blockChainController.chain)
 
 routes.get('/info', blockChainController.info)
 

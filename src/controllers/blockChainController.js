@@ -3,13 +3,9 @@ const Block = require('../models/block')
 const blockChain = new Blockchain()
 
 module.exports = {
-  index: async (req, res) => {
-    const size = await blockChain.getBlockHeight()
-    res.json({
-      status: true,
-      message: 'Server is working',
-      size: size
-    })
+  chain: async (req, res) => {
+    const chain = await blockChain.validateChain()
+    res.json(chain)
   },
   info: async (req, res) => {
     const size = await blockChain.getBlockHeight()

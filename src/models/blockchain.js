@@ -73,15 +73,19 @@ class Blockchain {
   async validateChain () {
     let errorLog = []
     let chainLength = await this.getBlockHeight()
+    let chain = []
     for (let i = 0; i < chainLength - 1; i++) {
-      if (!this.validateBlock(i))errorLog.push(i)
+      const valid = await this.validateBlock(i)
+      if (!valid)errorLog.push(i)
 
       let block = await this.getBlock(i)
       let blockHash = block.hash
 
       let nextBlock = await this.getBlock(i + 1)
       let previousHash = nextBlock.previousBlockHash
+      block.isValid = valid
 
+      chain.push(block)
       if (blockHash !== previousHash) {
         errorLog.push(i)
       }
@@ -93,6 +97,7 @@ class Blockchain {
     } else {
       console.log('No errors detected')
     }
+    return chain
   }
 }
 

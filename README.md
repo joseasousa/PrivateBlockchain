@@ -2,9 +2,10 @@
 This project is intended to demonstrated a simple private blockchain creation using models and helpers. It is ready to scale and build features on top of it
 
 ### Requirements
-* [Node.js](https://nodejs.org)
-* [NPM](https://www.npmjs.com)
-* [LevelDB](https://github.com/google/leveldb)
+* [Node.js: 8.11.3 LTS](https://nodejs.org)
+* [express](https://www.express.com)
+* [LevelDB](http://expressjs.com)
+* [Jest](https://jestjs.io)
 
 
 ## Usage
@@ -25,7 +26,7 @@ This installs the dependencies of the project.
 ```sh
 npm start
 ```
-This starts the API server, listening on port 3000 of localhost.
+This starts the API server, listening on port 8000 of localhost.
 
 ### Endpoints
 
