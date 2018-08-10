@@ -31,6 +31,16 @@ This starts the API server, listening on port 8000 of localhost.
 ### Endpoints
 
 The endpoints implemented are:
+### GET /info
+
+Sample output:
+```json
+{
+  "status": true,
+  "message": "Server is working",
+  "size": 3
+}
+```
 
 ### POST /block
 
@@ -64,22 +74,22 @@ Sample output:
 Sample output:
 ```json
 [
-	{
-		"hash": "253eea560b7b62557a3f6efdccbba7974b9e4570bad921b3be01a7dff75c6ada",
-		"height": 0,
-		"body": "First block in the chain - Genesis block",
-		"time": "1533917415",
-		"previousBlockHash": "",
-		"isValid": true
-	},
-	{
-		"hash": "7ce0d8803c51dac90c9fcfd381aa047f27e78afa54842b9a48d8644b5312d40c",
-		"height": 1,
-		"body": "blocc",
-		"time": "1533917569",
-		"previousBlockHash": "253eea560b7b62557a3f6efdccbba7974b9e4570bad921b3be01a7dff75c6ada",
-		"isValid": true
-	}
+  {
+	"hash": "253eea560b7b62557a3f6efdccbba7974b9e4570bad921b3be01a7dff75c6ada",
+	"height": 0,
+	"body": "First block in the chain - Genesis block",
+	"time": "1533917415",
+	"previousBlockHash": "",
+	"isValid": true
+  },
+  {
+  	"hash": "7ce0d8803c51dac90c9fcfd381aa047f27e78afa54842b9a48d8644b5312d40c",
+	"height": 1,
+	"body": "blocc",
+	"time": "1533917569",
+	"previousBlockHash": "253eea560b7b62557a3f6efdccbba7974b9e4570bad921b3be01a7dff75c6ada",
+	"isValid": true
+  }
 ]
 ```
 
